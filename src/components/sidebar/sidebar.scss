@@ -1,0 +1,17 @@
+.sidebar {
+  border-right: 5px solid white;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 70px;
+
+  span {
+    margin-top: 20px;
+    border-bottom: 3px solid white;
+    font-size: 25px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+  }
+}

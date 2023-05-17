@@ -1,0 +1,44 @@
+.audio {
+  width: 100%;
+  height: 100vh;
+
+  .container {
+    display: flex;
+    background-color: whitesmoke;
+    height: calc(100vh - 70px);
+    .left {
+      flex: 1;
+    }
+    .right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 5;
+      table {
+        text-align: center;
+        border-spacing: 0;
+        border-collapse: collapse;
+        overflow: hidden;
+        box-shadow: 0 2px 12px rgba(32, 32, 32, 0.3);
+        margin-bottom: 50px;
+
+        thead {
+          background-color: white;
+        }
+        th,
+        td {
+          padding: 8px 15px;
+        }
+      }
+      span {
+        margin-bottom: 20px;
+        font-size: 30px;
+      }
+      form {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+    }
+  }
+}
