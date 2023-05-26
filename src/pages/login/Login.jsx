@@ -22,7 +22,7 @@ const Login = () => {
         password,
       });
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-      res.data.user && navigate("/");
+      res.data.user.isAdmin && navigate("/");
     } catch (error) {
       dispatch({ type: "LOGIN_FAILURE" });
       if (
@@ -62,6 +62,9 @@ const Login = () => {
             </button>
           </form>
           {error && <span style={{ color: "red" }}>{error}</span>}
+          <span>admin login credentials</span>
+          <span style={{ color: "green" }}>admin@gmail.com</span>
+          <span style={{ color: "green" }}>Adminpassword1@</span>
         </div>
       </div>
     </div>
