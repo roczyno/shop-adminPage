@@ -33,11 +33,15 @@ const Pdf = () => {
         formData.append("desc", desc);
 
         setErrorMsg("");
-        await axios.post("http://localhost:5000/api/pdf/upload", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
+        await axios.post(
+          "https://file-server-api.onrender.com/api/pdf/upload",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
       } else {
         setErrorMsg("Please select a file to add.");
       }
@@ -49,7 +53,9 @@ const Pdf = () => {
   useEffect(() => {
     const getAllPdf = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/pdf/find");
+        const res = await axios.get(
+          "https://file-server-api.onrender.com/api/pdf/find"
+        );
         setData(res.data);
       } catch (error) {
         console.log(error);

@@ -33,11 +33,15 @@ const Image = () => {
         formData.append("desc", desc);
 
         setErrorMsg("");
-        await axios.post("http://localhost:5000/api/images/upload", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
+        await axios.post(
+          "https://file-server-api.onrender.com/api/images/upload",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
       } else {
         setErrorMsg("Please select a file to add.");
       }
@@ -49,7 +53,9 @@ const Image = () => {
   useEffect(() => {
     const getAllImages = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/images/find");
+        const res = await axios.get(
+          "https://file-server-api.onrender.com/api/images/find"
+        );
         setData(res.data);
       } catch (error) {
         console.log(error);

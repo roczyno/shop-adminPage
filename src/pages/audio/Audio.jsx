@@ -33,11 +33,15 @@ const Audio = () => {
         formData.append("desc", desc);
 
         setErrorMsg("");
-        await axios.post("http://localhost:5000/api/audios/upload", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
+        await axios.post(
+          "https://file-server-api.onrender.com/api/audios/upload",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
       } else {
         setErrorMsg("Please select a file to add.");
       }
@@ -49,7 +53,9 @@ const Audio = () => {
   useEffect(() => {
     const getAllAudios = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/audios/find");
+        const res = await axios.get(
+          "https://file-server-api.onrender.com/api/audios/find"
+        );
         setData(res.data);
       } catch (error) {
         console.log(error);

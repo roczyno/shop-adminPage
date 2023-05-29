@@ -33,11 +33,15 @@ const Video = () => {
         formData.append("desc", desc);
 
         setErrorMsg("");
-        await axios.post("http://localhost:5000/api/videos/upload", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
+        await axios.post(
+          "https://file-server-api.onrender.com/api/videos/upload",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
       } else {
         setErrorMsg("Please select a file to add.");
       }
@@ -49,7 +53,9 @@ const Video = () => {
   useEffect(() => {
     const getAllVideos = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/videos/find");
+        const res = await axios.get(
+          "https://file-server-api.onrender.com/api/videos/find"
+        );
         setData(res.data);
       } catch (error) {
         console.log(error);
