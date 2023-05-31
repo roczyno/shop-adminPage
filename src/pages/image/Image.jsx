@@ -68,6 +68,19 @@ const Image = () => {
     };
     getAllImages();
   });
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`https://file-server-admin.onrender.com/${id}`, {
+        headers: {
+          token:
+            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="image">
       <Navbar />
@@ -84,7 +97,6 @@ const Image = () => {
                 <th>Description</th>
                 <th>Downloads</th>
                 <th>Email Sent</th>
-                <td>delete</td>
               </tr>
             </thead>
             <tbody>
@@ -95,7 +107,7 @@ const Image = () => {
                   <td>{item.desc}</td>
                   <td>{item.download}</td>
                   <td>{item.emailsSent}</td>
-                  <td>delete</td>
+                  <td onClick={() => handleDelete(item._id)}>delete</td>
                 </tr>
               ))}
             </tbody>
