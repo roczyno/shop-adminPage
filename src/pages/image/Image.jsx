@@ -84,6 +84,7 @@ const Image = () => {
                 <th>Description</th>
                 <th>Downloads</th>
                 <th>Email Sent</th>
+                <td>delete</td>
               </tr>
             </thead>
             <tbody>
