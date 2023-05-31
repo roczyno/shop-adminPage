@@ -71,12 +71,15 @@ const Image = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://file-server-admin.onrender.com/${id}`, {
-        headers: {
-          token:
-            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-        },
-      });
+      await axios.delete(
+        `https://file-server-admin.onrender.com/images/delete/${id}`,
+        {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
     } catch (error) {
       console.log(error);
     }
@@ -107,7 +110,12 @@ const Image = () => {
                   <td>{item.desc}</td>
                   <td>{item.download}</td>
                   <td>{item.emailsSent}</td>
-                  <td onClick={() => handleDelete(item._id)}>delete</td>
+                  <td
+                    style={{ cursor: "pointer" }}
+                    onClick={() => handleDelete(item._id)}
+                  >
+                    delete
+                  </td>
                 </tr>
               ))}
             </tbody>
