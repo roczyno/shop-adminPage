@@ -54,7 +54,12 @@ const Pdf = () => {
     const getAllPdf = async () => {
       try {
         const res = await axios.get(
-          "https://file-server-api.onrender.com/api/pdf/find"
+          "https://file-server-api.onrender.com/api/pdf/find",
+          {
+            headers: {
+              token: "Bearer " + localStorage.getItem("user").accessToken,
+            },
+          }
         );
         setData(res.data);
       } catch (error) {

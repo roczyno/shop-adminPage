@@ -54,7 +54,12 @@ const Audio = () => {
     const getAllAudios = async () => {
       try {
         const res = await axios.get(
-          "https://file-server-api.onrender.com/api/audios/find"
+          "https://file-server-api.onrender.com/api/audios/find",
+          {
+            headers: {
+              token: "Bearer " + localStorage.getItem("user").accessToken,
+            },
+          }
         );
         setData(res.data);
       } catch (error) {

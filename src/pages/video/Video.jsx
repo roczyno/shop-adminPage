@@ -54,7 +54,12 @@ const Video = () => {
     const getAllVideos = async () => {
       try {
         const res = await axios.get(
-          "https://file-server-api.onrender.com/api/videos/find"
+          "https://file-server-api.onrender.com/api/videos/find",
+          {
+            headers: {
+              token: "Bearer " + localStorage.getItem("user").accessToken,
+            },
+          }
         );
         setData(res.data);
       } catch (error) {

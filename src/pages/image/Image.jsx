@@ -54,7 +54,12 @@ const Image = () => {
     const getAllImages = async () => {
       try {
         const res = await axios.get(
-          "https://file-server-api.onrender.com/api/images/find"
+          "https://file-server-api.onrender.com/api/images/find",
+          {
+            headers: {
+              token: "Bearer " + localStorage.getItem("user").accessToken,
+            },
+          }
         );
         setData(res.data);
       } catch (error) {
@@ -89,6 +94,7 @@ const Image = () => {
                   <td>{item.desc}</td>
                   <td>{item.download}</td>
                   <td>{item.emailsSent}</td>
+                  <td>delete</td>
                 </tr>
               ))}
             </tbody>
