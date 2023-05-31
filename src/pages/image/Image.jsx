@@ -71,6 +71,7 @@ const Image = () => {
 
   const handleDelete = async (id) => {
     alert("hey");
+    console.log("dgkdg");
     try {
       await axios.delete(
         `https://file-server-admin.onrender.com/images/delete/${id}`,
