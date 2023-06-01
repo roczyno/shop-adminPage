@@ -38,8 +38,8 @@ const Image = () => {
           formData,
           {
             headers: {
-              "Content-Type": "multipart/form-data",
               token: "Bearer " + localStorage.getItem("user").accessToken,
+              "Content-Type": "multipart/form-data",
             },
           }
         );
