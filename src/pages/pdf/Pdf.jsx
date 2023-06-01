@@ -49,6 +49,22 @@ const Pdf = () => {
       error.response && setErrorMsg(error.response.data);
     }
   };
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(
+        `https://file-server-api.onrender.com/api/pdf/delete/${id}`,
+        {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
+      setData(data.filter((item) => item._id !== id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     const getAllPdf = async () => {
@@ -94,6 +110,12 @@ const Pdf = () => {
                   <td>{item.desc}</td>
                   <td>{item.download}</td>
                   <td>{item.emailsSent}</td>
+                  <td
+                    style={{ cursor: "pointer" }}
+                    onClick={() => handleDelete(item._id)}
+                  >
+                    delete
+                  </td>
                 </tr>
               ))}
             </tbody>
