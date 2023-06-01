@@ -50,7 +50,7 @@ const Video = () => {
       error.response && setErrorMsg(error.response.data);
     }
   };
-
+  console.log(localStorage.getItem("user").accessToken);
   useEffect(() => {
     const getAllVideos = async () => {
       try {
