@@ -72,7 +72,7 @@ const Image = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `https://file-server-api.onrender.com/images/delete/${id}`,
+        `https://file-server-api.onrender.com/api/images/delete/${id}`,
         {
           headers: {
             token:
