@@ -70,11 +70,9 @@ const Image = () => {
   });
 
   const handleDelete = async (id) => {
-    alert("hey");
-    console.log("dgkdg");
     try {
       await axios.delete(
-        `https://file-server-admin.onrender.com/images/delete/${id}`,
+        `https://file-server-api.onrender.com/images/delete/${id}`,
         {
           headers: {
             token:
@@ -82,6 +80,7 @@ const Image = () => {
           },
         }
       );
+      setData(data.filter((item) => item._id !== id));
     } catch (error) {
       console.log(error);
     }
