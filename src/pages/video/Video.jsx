@@ -38,7 +38,9 @@ const Video = () => {
           formData,
           {
             headers: {
-              token: "Bearer " + localStorage.getItem("user").accessToken,
+              token:
+                "Bearer " +
+                JSON.parse(localStorage.getItem("user")).accessToken,
               "Content-Type": "multipart/form-data",
             },
           }
@@ -58,7 +60,9 @@ const Video = () => {
           "https://file-server-api.onrender.com/api/videos/find",
           {
             headers: {
-              token: "Bearer " + localStorage.getItem("user").accessToken,
+              token:
+                "Bearer " +
+                JSON.parse(localStorage.getItem("user")).accessToken,
             },
           }
         );

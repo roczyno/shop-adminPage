@@ -38,7 +38,9 @@ const Audio = () => {
           formData,
           {
             headers: {
-              token: "Bearer " + localStorage.getItem("user").accessToken,
+              token:
+                "Bearer " +
+                JSON.parse(localStorage.getItem("user")).accessToken,
               "Content-Type": "multipart/form-data",
             },
           }
@@ -58,7 +60,9 @@ const Audio = () => {
           "https://file-server-api.onrender.com/api/audios/find",
           {
             headers: {
-              token: "Bearer " + localStorage.getItem("user").accessToken,
+              token:
+                "Bearer " +
+                JSON.parse(localStorage.getItem("user")).accessToken,
             },
           }
         );

@@ -38,7 +38,9 @@ const Pdf = () => {
           formData,
           {
             headers: {
-              token: "Bearer " + localStorage.getItem("user").accessToken,
+              token:
+                "Bearer " +
+                JSON.parse(localStorage.getItem("user")).accessToken,
               "Content-Type": "multipart/form-data",
             },
           }
@@ -74,7 +76,9 @@ const Pdf = () => {
           "https://file-server-api.onrender.com/api/pdf/find",
           {
             headers: {
-              token: "Bearer " + localStorage.getItem("user").accessToken,
+              token:
+                "Bearer " +
+                JSON.parse(localStorage.getItem("user")).accessToken,
             },
           }
         );
