@@ -39,6 +39,7 @@ const Pdf = () => {
           {
             headers: {
               "Content-Type": "multipart/form-data",
+              token: "Bearer " + localStorage.getItem("user").accessToken,
             },
           }
         );
