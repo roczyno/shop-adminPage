@@ -34,13 +34,18 @@ const Image = () => {
         formData.append("desc", desc);
 
         setErrorMsg("");
-        await axios.post("http://localhost:5000/api/images/upload", formData, {
-          headers: {
-            token:
-              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-            "Content-Type": "multipart/form-data",
-          },
-        });
+        await axios.post(
+          "https://file-server-api.onrender.com/api/images/upload",
+          formData,
+          {
+            headers: {
+              token:
+                "Bearer " +
+                JSON.parse(localStorage.getItem("user")).accessToken,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
         setState({
           title: "",
           desc: "",
@@ -58,12 +63,16 @@ const Image = () => {
   useEffect(() => {
     const getAllImages = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/images/find", {
-          headers: {
-            token:
-              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-          },
-        });
+        const res = await axios.get(
+          "https://file-server-api.onrender.com/api/images/find",
+          {
+            headers: {
+              token:
+                "Bearer " +
+                JSON.parse(localStorage.getItem("user")).accessToken,
+            },
+          }
+        );
         setData(res.data);
       } catch (error) {
         console.log(error);
@@ -74,12 +83,15 @@ const Image = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/images/delete/${id}`, {
-        headers: {
-          token:
-            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-        },
-      });
+      await axios.delete(
+        `https://file-server-api.onrender.com/api/images/delete/${id}`,
+        {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        }
+      );
       setData(data.filter((item) => item._id !== id));
     } catch (error) {
       console.log(error);
