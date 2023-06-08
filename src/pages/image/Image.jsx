@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import axios from "axios";
@@ -12,6 +12,7 @@ const Image = () => {
   const [file, setFile] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
   const [data, setData] = useState([]);
+  const fileInputRef = useRef(null);
 
   const handleInputChange = (event) => {
     setState({
@@ -33,18 +34,19 @@ const Image = () => {
         formData.append("desc", desc);
 
         setErrorMsg("");
-        await axios.post(
-          "https://file-server-api.onrender.com/api/images/upload",
-          formData,
-          {
-            headers: {
-              token:
-                "Bearer " +
-                JSON.parse(localStorage.getItem("user")).accessToken,
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
+        await axios.post("http://localhost:5000/api/images/upload", formData, {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        setState({
+          title: "",
+          desc: "",
+        });
+        setFile(null);
+        fileInputRef.current.value = "";
       } else {
         setErrorMsg("Please select a file to add.");
       }
@@ -56,16 +58,12 @@ const Image = () => {
   useEffect(() => {
     const getAllImages = async () => {
       try {
-        const res = await axios.get(
-          "https://file-server-api.onrender.com/api/images/find",
-          {
-            headers: {
-              token:
-                "Bearer " +
-                JSON.parse(localStorage.getItem("user")).accessToken,
-            },
-          }
-        );
+        const res = await axios.get("http://localhost:5000/api/images/find", {
+          headers: {
+            token:
+              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+          },
+        });
         setData(res.data);
       } catch (error) {
         console.log(error);
@@ -76,15 +74,12 @@ const Image = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(
-        `https://file-server-api.onrender.com/api/images/delete/${id}`,
-        {
-          headers: {
-            token:
-              "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
-          },
-        }
-      );
+      await axios.delete(`http://localhost:5000/api/images/delete/${id}`, {
+        headers: {
+          token:
+            "Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+        },
+      });
       setData(data.filter((item) => item._id !== id));
     } catch (error) {
       console.log(error);
@@ -145,7 +140,11 @@ const Image = () => {
               onChange={handleInputChange}
             />
             <label>Description</label>
-            <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+            <input
+              type="file"
+              onChange={(e) => setFile(e.target.files[0])}
+              ref={fileInputRef}
+            />
             <button
               type="submit"
               style={{
